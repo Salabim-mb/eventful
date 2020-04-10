@@ -1,3 +1,8 @@
+import {
+    SignUp,
+    SignIn
+} from 'pages';
+
 const path_list = {
     DASHBOARD: "/",
     REGISTER: "/register",
@@ -12,7 +17,13 @@ const path_list = {
 
 export default [
     {
-
+        path: path_list.REGISTER,
+        component: SignUp,
+        exact: true
+    }, {
+        path: path_list.LOGIN,
+        component: SignIn,
+        exact: true
     }
 ];
 
