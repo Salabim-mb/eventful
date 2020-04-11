@@ -2,9 +2,8 @@ import React, {useState} from "react";
 import {useStyles} from "styles/drawerStyle";
 import {SwipeableDrawer} from "@material-ui/core";
 import DrawerList from "containers/DrawerList";
-import MenuIcon from '@material-ui/icons/Menu';
 import HidingAppBar from "components/HidingAppBar/HidingAppBar";
-import IconButton from "@material-ui/core/IconButton";
+
 
 const MenuBar = () => {
     const theme = useStyles();
@@ -14,7 +13,6 @@ const MenuBar = () => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-
         setLeft(left);
     };
 
@@ -28,7 +26,7 @@ const MenuBar = () => {
                 onClose={toggleDrawer(false)}
                 onOpen={toggleDrawer( true)}
             >
-                <DrawerList anchor="left" theme={theme} toggleDrawer={toggleDrawer} />
+                <DrawerList anchor="left" theme={theme} toggleDrawer={toggleDrawer}/>
             </SwipeableDrawer>
         </React.Fragment>
     );

@@ -6,29 +6,30 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SettingsIcon from '@material-ui/icons/Settings';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import {path_list} from "./routes";
 
 
 export const menuOptions = [
     {
         name: 'Dashboard',
         icon: <DashboardIcon />,
-        onClick: () => {}
+        path: path_list.DASHBOARD,
     }, {
         name: 'My Profile',
         icon: <PersonIcon />,
-        onClick: () => {}
+        path: path_list.PROFILE,
     }, {
         name: 'My events',
         icon: <EventAvailableIcon />,
-        onClick: () => {}
+        path: path_list.MY_EVENTS,
     }, {
         name: 'Friends',
         icon: <GroupIcon />,
-        onClick: () => {}
+        path: path_list.FRIEND_LIST,
     }, {
         name: 'Meet',
         icon: <GroupAddIcon />,
-        onClick: () => {}
+        path: path_list.MEET,
     }
 ];
 
@@ -36,10 +37,10 @@ export const userOptions = [
     {
         name: 'Settings',
         icon: <SettingsIcon />,
-        onClick: () => {}
+        path: path_list.SETTINGS,
     }, {
         name: 'Log out',
         icon: <MeetingRoomIcon />,
-        onClick: () => {}
+        onClick: null
     }
 ];

@@ -1,12 +1,11 @@
 import React from "react";
 import clsx from "clsx";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-
 import { menuOptions, userOptions } from "constants/menuOptions";
-import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
+import {BrowserRouter as Router} from "react-router-dom";
+import ListItemLink from "containers/ListItemLink";
+
 
 const DrawerList = ({anchor, theme, toggleDrawer}) => (
     <div
@@ -14,26 +13,22 @@ const DrawerList = ({anchor, theme, toggleDrawer}) => (
             [theme.fullList]: anchor === 'top' || anchor === 'bottom'
         })}
         role="presentation"
-        onClick={toggleDrawer( false)}
-        onKeyDown={toggleDrawer( false)}
+        onClick={toggleDrawer(false)}
+        onKeyDown={toggleDrawer(false)}
     >
-        <List>
-            {menuOptions.map(item => (
-                <ListItem button key={item.name} onClick={item.onClick}>
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.name} />
-                </ListItem>
-            ))}
-        </List>
-        <Divider />
-        <List>
-            {userOptions.map(item => (
-                <ListItem button key={item.name} onClick={item.onClick}>
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.name} />
-                </ListItem>
-            ))}
-        </List>
+        <Router>
+            <List>
+                {menuOptions.map(item => (
+                    <ListItemLink path={item.path} name={item.name} icon={item.icon} onClick={null}/>
+                ))}
+            </List>
+            <Divider/>
+            <List>
+                {userOptions.map(item => (
+                    <ListItemLink path={item.path} name={item.name} icon={item.icon} onClick={item.onClick} />
+                ))}
+            </List>
+        </Router>
     </div>
 );
 
