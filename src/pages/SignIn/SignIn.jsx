@@ -9,7 +9,8 @@ import IconBar from "containers/IconBar";
 import {loginFacebook} from "utils/oauth/facebook";
 import {loginInstagram} from "utils/oauth/instagram";
 import {loginReddit} from "utils/oauth/reddit";
-import LoginForm from "../../components/LoginForm/LoginForm";
+import LoginForm from "components/LoginForm/LoginForm";
+import {validateForm} from "utils/validateForm";
 
 
 
@@ -25,10 +26,10 @@ const SignIn = () => {
                 </Avatar>
                 <Typography component="h1" variant="h5">Log in</Typography>
                 <IconBar fauth={loginFacebook} iauth={loginInstagram} rauth={loginReddit} />
-                <LoginForm theme={theme} onSubmit={null} />
+                <LoginForm theme={theme} onSubmit={validateForm} />
             </div>
         </Container>
     );
-}
+};
 
 export default SignIn;

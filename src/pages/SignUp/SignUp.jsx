@@ -10,6 +10,7 @@ import {registerFacebook} from "utils/oauth/facebook";
 import {registerInstagram} from "utils/oauth/instagram";
 import {registerReddit} from "utils/oauth/reddit";
 import {useStyles} from "styles/authStyle";
+import {validateForm} from "../../utils/validateForm";
 
 
 const SignUp = () => {
@@ -24,7 +25,7 @@ const SignUp = () => {
                 </Avatar>
                 <Typography component="h1" variant="h5">Create new account</Typography>
                 <IconBar className={theme.form} fauth={registerFacebook} iauth={registerInstagram} rauth={registerReddit} />
-                <RegisterForm theme={theme} onSubmit={null}/>
+                <RegisterForm theme={theme} onSubmit={validateForm}/>
             </div>
         </Container>
     )

@@ -3,7 +3,6 @@ import clsx from "clsx";
 import List from "@material-ui/core/List";
 import { menuOptions, userOptions } from "constants/menuOptions";
 import Divider from "@material-ui/core/Divider";
-import {BrowserRouter as Router} from "react-router-dom";
 import ListItemLink from "containers/ListItemLink";
 
 

@@ -3,24 +3,42 @@ import Grid from "@material-ui/core/Grid";
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
+import {Redirect} from "react-router-dom";
+import CustomSnackBar from "../../containers/CustomSnackbar";
 
 
 const RegisterForm = ({theme, onSubmit}) => {
-    const [data, setData] = useState({
+    const [state, setState] = useState({
         firstName: "",
         lastName: "",
         email: "",
         password: "",
         passwordR: ""
     });
-    const [equal, setEqual] = useState(false);
+    const [correct, setCorrect] = useState(true);
+    const [equal, setEqual] = useState(true);
+    const [validated, setValidated] = useState(false);
+
+    const validate = (e) => {
+        e.preventDefault();
+        const is_ok = onSubmit(e);
+        if (is_ok) {
+            state.password === state.passwordR ? setValidated(true) : setEqual(false);
+        } else {
+            setCorrect(false);
+        }
+    };
+
+    const renderRedirect = () => {
+        return <Redirect to="/me/profile"/>;
+    };
 
     return (
-        <form className={theme.form} onSubmit={onSubmit}>
+        <form className={theme.form} onSubmit={validate}>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <TextField
-                        autoComplete="fname"
+                        autoComplete="firstName"
                         name="firstName"
                         variant="outlined"
                         required
@@ -28,6 +46,7 @@ const RegisterForm = ({theme, onSubmit}) => {
                         id="firstName"
                         label="First Name"
                         autoFocus
+                        onChange={e => setState({...state, [e.target.name]: e.target.value})}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -38,11 +57,13 @@ const RegisterForm = ({theme, onSubmit}) => {
                         id="lastName"
                         label="Last Name"
                         name="lastName"
-                        autoComplete="lname"
+                        autoComplete="lastName"
+                        onChange={e => setState({...state, [e.target.name]: e.target.value})}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
+                        type="email"
                         variant="outlined"
                         required
                         fullWidth
@@ -50,6 +71,7 @@ const RegisterForm = ({theme, onSubmit}) => {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
+                        onChange={e => setState({...state, [e.target.name]: e.target.value})}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -61,7 +83,9 @@ const RegisterForm = ({theme, onSubmit}) => {
                         label="Password"
                         type="password"
                         id="password"
-                        autoComplete="current-password"
+                        autoComplete="password"
+                        minLength="6"
+                        onChange={e => setState({...state, [e.target.name]: e.target.value})}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -73,7 +97,9 @@ const RegisterForm = ({theme, onSubmit}) => {
                         label="Repeat password"
                         type="password"
                         id="passwordR"
-                        autoComplete="current-password"
+                        autoComplete="passwordR"
+                        minLength="6"
+                        onChange={e => setState({...state, [e.target.name]: e.target.value})}
                     />
                 </Grid>
             </Grid>
@@ -93,6 +119,12 @@ const RegisterForm = ({theme, onSubmit}) => {
                     </Link>
                 </Grid>
             </Grid>
+            {
+                !equal ? <CustomSnackBar message="The passwords must be equal"/> :
+                !correct ? <CustomSnackBar message="Something went wrong. Try again" /> :
+                null
+            }
+            {validated && correct && equal ? renderRedirect() : null}
         </form>
     )
 };
