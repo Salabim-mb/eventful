@@ -6,6 +6,8 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SettingsIcon from '@material-ui/icons/Settings';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import HowToRegIcon from '@material-ui/icons/HowToReg';
 import {path_list} from "./routes";
 
 
@@ -42,5 +44,13 @@ export const userOptions = [
         name: 'Log out',
         icon: <MeetingRoomIcon />,
         onClick: null
+    }, {
+        name: 'Register',
+        icon: <HowToRegIcon />,
+        path: path_list.REGISTER
+    }, {
+        name: 'Log in',
+        icon: <ExitToAppIcon />,
+        path: path_list.LOGIN
     }
 ];

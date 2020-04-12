@@ -16,19 +16,17 @@ const DrawerList = ({anchor, theme, toggleDrawer}) => (
         onClick={toggleDrawer(false)}
         onKeyDown={toggleDrawer(false)}
     >
-        <Router>
-            <List>
-                {menuOptions.map(item => (
-                    <ListItemLink path={item.path} name={item.name} icon={item.icon} onClick={null}/>
-                ))}
-            </List>
-            <Divider/>
-            <List>
-                {userOptions.map(item => (
-                    <ListItemLink path={item.path} name={item.name} icon={item.icon} onClick={item.onClick} />
-                ))}
-            </List>
-        </Router>
+        <List>
+            {menuOptions.map(item => (
+                <ListItemLink path={item.path} name={item.name} icon={item.icon} onClick={null}/>
+            ))}
+        </List>
+        <Divider/>
+        <List>
+            {userOptions.map(item => (
+                <ListItemLink path={item.path} name={item.name} icon={item.icon} onClick={item.onClick || null} />
+            ))}
+        </List>
     </div>
 );
 
