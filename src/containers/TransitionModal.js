@@ -2,11 +2,12 @@ import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import {useStyles} from "../styles/modalStyle";
+import {useStyles} from "styles/modalStyle";
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
 
 
-const TransitionsModal = ({children}) => {
+const TransitionModal = ({children}) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -21,7 +22,7 @@ const TransitionsModal = ({children}) => {
     return (
         <div>
             <button type="button" onClick={handleOpen}>
-                react-transition-group
+                <p><GroupAddIcon/>Add people</p>
             </button>
             <Modal
                 aria-labelledby="transition-modal-title"
@@ -45,4 +46,4 @@ const TransitionsModal = ({children}) => {
     );
 }
 
-export default TransitionsModal;
+export default TransitionModal;

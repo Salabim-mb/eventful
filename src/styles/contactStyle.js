@@ -8,5 +8,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     button: {
         alignItems: 'left'
+    },
+    selected: {
+        color: theme.palette.primary.main,
+        backgroundColor: theme.palette.primary.main
     }
 }));
