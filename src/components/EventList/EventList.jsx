@@ -11,7 +11,16 @@ const EventList = ({theme}) => {
         'This week', 'Next week', 'This month', 'This year'
     ];
 
-    const eventList = [];
+    const eventList = [
+        {
+            id: 1,
+            name: "qwe",
+            date: "26.06.2020",
+            time: "17:00",
+            summary: "qweqweqweqweqwe",
+            description: "qweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqwe"
+        }
+    ];
 
     const groupElements = (array, parameter) => {
         const compare = (itemA, itemB) => {
@@ -64,7 +73,7 @@ const EventList = ({theme}) => {
                         <Divider variant="middle"/>
                         {groupElements(eventList, name) === [] ? "No events." :
                             groupElements(eventList, name).map((item) => (
-                            <EventCard theme={cardTheme} data={item.data} isAccepted={item.status}/>
+                            <EventCard key={item.id} theme={cardTheme} data={item.data} isAccepted={item.status}/>
                         ))}
                     </ul>
                 </li>

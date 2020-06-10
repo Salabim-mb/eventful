@@ -19,7 +19,7 @@ const MyEvents = () => {
         <Container className="main" >
             <CssBaseline />
             <EventList theme={theme} />
-            <Fab color="secondary" aria-label="add-event" onClick={setRedirect(true)}>
+            <Fab color="secondary" aria-label="add-event" onClick={e => setRedirect(true)}>
                 <AddIcon />
             </Fab>
             {redirect ? renderRedirect() : null}
