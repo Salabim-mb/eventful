@@ -4,6 +4,7 @@ import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid'
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
+import Expansion from "../../containers/Expansion";
 
 const EventFormContent = ({theme}) => {
 
@@ -11,6 +12,7 @@ const EventFormContent = ({theme}) => {
         name: "",
         date: new Date(),
         time_start: new Date(),
+        time_end: undefined,
         summary: "",
         description: "",
         guests: []
@@ -60,6 +62,19 @@ const EventFormContent = ({theme}) => {
                            'aria-label': 'change time'
                        }}
                    />
+                   <Expansion title="Add end time">
+                       <KeyboardTimePicker
+                           margin="normal"
+                           id="time-picker"
+                           name="time_end"
+                           label="Choose end time"
+                           value={state.time_end}
+                           onChange={e => setState({...state, time_end: e})}
+                           KeyboardButtonProps={{
+                               'aria-label': 'change time'
+                           }}
+                       />
+                   </Expansion>
                </Grid>
             </MuiPickersUtilsProvider>
         </form>
