@@ -1,7 +1,8 @@
 import {
     SignUp,
     SignIn,
-    MyEvents
+    MyEvents,
+    EventForm
 } from 'pages';
 
 const path_list = {
@@ -28,6 +29,10 @@ export default [
     }, {
         path: path_list.MY_EVENTS,
         component: MyEvents,
+        exact: true
+    }, {
+        path: path_list.NEW_EVENT,
+        component: EventForm,
         exact: true
     }
 ];

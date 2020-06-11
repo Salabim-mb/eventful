@@ -3,9 +3,6 @@ import {PersistentContext} from "context/PersistentContext";
 import {ContactCard, ListItemLink, TransitionModal, ErrorAlert, LoadingAlert} from "containers";
 import {useStyles} from "styles/contactStyle";
 
-
-
-
 const ContactManager = () => {
     const user = useContext(PersistentContext);
     const [contactList, setContactList] = useState([]);
