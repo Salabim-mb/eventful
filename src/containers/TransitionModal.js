@@ -38,7 +38,7 @@ const TransitionModal = ({children}) => {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        {...children}
+                        {children}
                     </div>
                 </Fade>
             </Modal>

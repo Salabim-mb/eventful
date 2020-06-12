@@ -1,13 +1,40 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid'
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
-import Expansion from "../../containers/Expansion";
+import Expansion from "containers/Expansion";
+import Divider from "@material-ui/core/Divider";
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import ContactCard from "containers/ContactCard";
+import {PersistentContext} from "context/PersistentContext";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
+const loadFriends = async (token) => {
+    const url = "";
+    const headers = {
+        Authorization: token,
+        "Content-Type": "application/json"
+    };
+    return tmpFriends;
+    const res = await fetch(url, {method: "GET", headers});
+
+    if (res.status === 200) {
+        return await res.json();
+    } else {
+        throw res.status;
+    }
+};
+
+const tmpFriends = [
+
+];
 
 const EventFormContent = ({theme}) => {
-
+    const [currentSearch, setCurrentSearch] = useState("");
+    const [friendList, setFriendList] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [state, setState] = useState({
         name: "",
         date: new Date(),
@@ -18,8 +45,35 @@ const EventFormContent = ({theme}) => {
         guests: []
     });
 
+    const user = useContext(PersistentContext);
+
+    useEffect(() => {
+        const loadFriendList = async () => {
+            setLoading(true);
+            try {
+                const res = await loadFriends(user?.token);
+                //setFriendList(res);
+            } catch(e) {
+                setFriendList([])
+            } finally {
+                setLoading(false);
+            };
+        };
+        loadFriendList();
+    }, [user]);
+
+    const addGuest = (e) => {
+        setState({...state, guests: [...state.guests, e.target.value]})
+    };
+
     const validate = (e) => {
         e.preventDefault();
+    };
+
+    const cancelInvite = (e) => {
+        let newList = [...state.guests];
+        newList.filter((item) => item.id !== e.target.value.id);
+        setState({...state, guests: newList});
     };
 
     return (
@@ -77,6 +131,42 @@ const EventFormContent = ({theme}) => {
                    </Expansion>
                </Grid>
             </MuiPickersUtilsProvider>
+            <Divider className={theme?.divider}/>
+            <TextField
+                id="outlined-multiline-static"
+                label="Add description"
+                multiline
+                fullWidth
+                required
+                rows={4}
+                value={state.description}
+                onChange={e => setState({...state, description: e.target.value})}
+                variant="outlined"
+            />
+            <div>
+                {
+                    loading ? <CircularProgress /> : (
+                        <>
+                            <GroupAddIcon />
+                            <TextField
+                                id="standard-search"
+                                label="Invite people"
+                                type="search"
+                                fullWidth
+                                value={currentSearch}
+                                onChange={e => setCurrentSearch(e.target.value)}
+                            />
+                            {
+                                friendList.filter(
+                                    (item) => item.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                                        item.email.toLowerCase().includes(currentSearch.toLowerCase())).map((contact) => (
+                                    <ContactCard user={contact} onClick={state.guests.includes(contact) ? cancelInvite : addGuest} theme={theme} key={contact.id} selected={state.guests.includes(contact)}/>
+                                ))
+                            }
+                        </>
+                    )
+                }
+            </div>
         </form>
     )
 };

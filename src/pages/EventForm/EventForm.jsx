@@ -7,7 +7,7 @@ const EventForm = () => {
     const theme = null;
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="sm">
             <CssBaseline />
             <EventFormContent theme={theme} />
         </Container>
