@@ -5,13 +5,21 @@ const cookies = new Cookies();
 
 export const SettingsContext = React.createContext({
    settings: {},
-    changeSettings: () => {}
+    changeSettings: () => {},
+    setSettings: () => {},
+    clearSettings: () => {}
 });
 
 export const SettingsProvider = props => {
-    const [settings, setSettings] = useState(cookies.get('settings'));
+    const [settings, setSettings] = useState(cookies.get('settings') || {
+        meet: false,
+        nots: false,
+        dark: false
+    });
     const user = {
-        settings,
+        meet: settings.meet,
+        nots: settings.nots,
+        dark: settings.dark,
         changeSettings: (data) => {
             cookies.set("settings", {...settings, ...data}, {
                 path: "/",
@@ -19,6 +27,13 @@ export const SettingsProvider = props => {
             });
             setSettings(data);
         },
+        setSettings: () => {
+            cookies.set("settings", {
+                meet: false,
+                dark: false,
+                nots: false
+            })
+        }
     };
 
     return <SettingsContext.Provider value={user} {...props} />;

@@ -3,7 +3,7 @@ import {Switch, Route, useLocation} from "react-router-dom";
 import {PersistentContext} from "context/PersistentContext";
 import path_list from "constants/routes";
 
-const Router = () => {
+const Router = (props) => {
     const location = useLocation();
 
     return (
@@ -15,7 +15,7 @@ const Router = () => {
                             ({component: Component, path, ...rest}) => {
                                 return (
                                     <Route path={path} key={path} {...rest}>
-                                        <Component {...rest} />
+                                        <Component {...props} {...rest} />
                                     </Route>
                                 );
                             }

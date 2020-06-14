@@ -1,6 +1,7 @@
 import {
     SignUp,
-    SignIn
+    SignIn,
+    Settings
 } from 'pages';
 
 const path_list = {
@@ -12,6 +13,7 @@ const path_list = {
     NEW_EVENT: "/newevent",
     SETTINGS: "/me/settings",
     MEET: "/meet",
+    MEET_CONFIG: "/meet/setprofile",
     FRIEND_LIST: "/me/friends"
 };
 
@@ -23,6 +25,10 @@ export default [
     }, {
         path: path_list.LOGIN,
         component: SignIn,
+        exact: true
+    }, {
+        path: path_list.SETTINGS,
+        component: Settings,
         exact: true
     }
 ];

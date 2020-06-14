@@ -1,18 +1,15 @@
-import React, {useContext, useState} from "react";
-import {SettingsContext} from "context/SettingsContext";
+import React from "react";
 import Container from "@material-ui/core/Container";
 import {CssBaseline} from "@material-ui/core";
+import SettingsContent from "components/SettingsContent";
 
-const Settings = () => {
-    const [redirect, setRedirect] = useState(false);
-    const settings = useContext(SettingsContext);
-
+const Settings = (props) => {
     const theme = {};
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={theme.paper}>
-                <SettingsContent settings={settings} theme={theme}/>
+                <SettingsContent setDarkMode={props.setDarkMode} theme={theme}/>
             </div>
         </Container>
     )
