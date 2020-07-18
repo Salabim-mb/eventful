@@ -147,15 +147,17 @@ const EventFormContent = ({theme}) => {
                 {
                     loading ? <CircularProgress /> : (
                         <>
-                            <GroupAddIcon />
-                            <TextField
-                                id="standard-search"
-                                label="Invite people"
-                                type="search"
-                                fullWidth
-                                value={currentSearch}
-                                onChange={e => setCurrentSearch(e.target.value)}
-                            />
+                            <div className="d-inline-block">
+                                <GroupAddIcon />
+                                <TextField
+                                    id="standard-search"
+                                    label="Invite people"
+                                    type="search"
+                                    fullWidth
+                                    value={currentSearch}
+                                    onChange={e => setCurrentSearch(e.target.value)}
+                                />
+                            </div>
                             {
                                 friendList.filter(
                                     (item) => item.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
