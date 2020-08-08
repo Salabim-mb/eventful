@@ -6,10 +6,11 @@ import Grid from '@material-ui/core/Grid'
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 import Expansion from "containers/Expansion";
 import Divider from "@material-ui/core/Divider";
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import ContactCard from "containers/ContactCard";
 import {PersistentContext} from "context/PersistentContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import SaveIcon from '@material-ui/icons/Save';
+import IconButton from "@material-ui/core/IconButton";
 
 const loadFriends = async (token) => {
     const url = "";
@@ -59,6 +60,9 @@ const EventFormContent = ({theme}) => {
                 setLoading(false);
             };
         };
+        const renderSaveButton = () => {
+            const bar = document.getElementById()
+        }
         loadFriendList();
     }, [user]);
 
@@ -75,6 +79,14 @@ const EventFormContent = ({theme}) => {
         newList.filter((item) => item.id !== e.target.value.id);
         setState({...state, guests: newList});
     };
+
+    const renderSaveButton = () => (
+        <div className="d-block justify-content-center" style={{bottom: 0}}>
+            <IconButton>
+                <SaveIcon />
+            </IconButton>
+        </div>
+    );
 
     return (
         <form className={theme?.form} onSubmit={validate}>
@@ -147,8 +159,7 @@ const EventFormContent = ({theme}) => {
                 {
                     loading ? <CircularProgress /> : (
                         <>
-                            <div className="d-inline-block">
-                                <GroupAddIcon />
+                            <div>
                                 <TextField
                                     id="standard-search"
                                     label="Invite people"
@@ -169,6 +180,7 @@ const EventFormContent = ({theme}) => {
                     )
                 }
             </div>
+            {state.name !== "" && state.description !== "" && renderSaveButton()}
         </form>
     )
 };

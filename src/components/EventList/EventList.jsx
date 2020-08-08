@@ -15,7 +15,7 @@ const EventList = ({theme}) => {
         {
             id: 1,
             name: "qwe",
-            date: "26.06.2020",
+            date: new Date(2020, 9, 30),
             time: "17:00",
             summary: "qweqweqweqweqwe",
             description: "qweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqweqwe"
