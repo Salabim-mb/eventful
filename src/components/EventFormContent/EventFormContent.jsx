@@ -10,7 +10,7 @@ import ContactCard from "containers/ContactCard";
 import {PersistentContext} from "context/PersistentContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import SaveIcon from '@material-ui/icons/Save';
-import IconButton from "@material-ui/core/IconButton";
+import Fab from "@material-ui/core/Fab";
 
 const loadFriends = async (token) => {
     const url = "";
@@ -60,9 +60,6 @@ const EventFormContent = ({theme}) => {
                 setLoading(false);
             };
         };
-        const renderSaveButton = () => {
-            const bar = document.getElementById()
-        }
         loadFriendList();
     }, [user]);
 
@@ -80,11 +77,16 @@ const EventFormContent = ({theme}) => {
         setState({...state, guests: newList});
     };
 
+    const saveEvent = (e) => {
+        // post to db
+
+    };
+
     const renderSaveButton = () => (
-        <div className="d-block justify-content-center" style={{bottom: 0}}>
-            <IconButton>
+        <div className="d-block justify-content-center">
+            <Fab className={theme.fab} color="secondary" aria-label="save-event" onClick={e => saveEvent(e)}>
                 <SaveIcon />
-            </IconButton>
+            </Fab>
         </div>
     );
 
@@ -128,7 +130,7 @@ const EventFormContent = ({theme}) => {
                            'aria-label': 'change time'
                        }}
                    />
-                   <Expansion title="Add end time">
+                   <Expansion title="Add end time" className={theme.expansion}>
                        <KeyboardTimePicker
                            margin="normal"
                            id="time-picker"
