@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import {SingleLineGridList} from "containers/SingleLineGridList";
 import {useStyles} from "styles/bioFormStyle";
 import Button from "@material-ui/core/Button";
-import PhotoCamera from "@material-ui/icons/PhotoCameraIcon";
 import {TextField} from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
 
 const BioForm = () => {
     const theme = useStyles();
@@ -25,20 +25,23 @@ const BioForm = () => {
         <>
             <SingleLineGridList theme={theme} data={data} onPhotoClick={deletePhoto}/>
             <input
-                accept="image/*"
-                className={theme.fileInput}
-                id="contained-button-file"
-                multiple
+                hidden
                 type="file"
+                multiple
+                accept="image/*"
+                id="photo"
+                onChange={addPhotos}
             />
-            <label htmlFor="contained-button-file">
+            <label htmlFor="photo">
                 <Button
-                    variant="contained"
+                    component="span"
                     color="primary"
-                    {...data.length >= 5 && "disabled"}
-                    endIcon={<PhotoCamera />}
+                    variant="outlined"
+                    onClick={addPhotos}
+                    fullWidth
+                    className={theme.addPhotoButton}
                 >
-                    Add photo ({data.length} / 5)
+                    Add photos
                 </Button>
             </label>
             <TextField
@@ -50,9 +53,11 @@ const BioForm = () => {
                 InputLabelProps={{
                     shrink: true
                 }}
+                variant="outlined"
             />
             <TextField
                 id="outlined-multiline"
+                className={theme.bio}
                 label="Add bio"
                 multiline
                 fullWidth
@@ -61,10 +66,14 @@ const BioForm = () => {
                 onChange={e => setBio(e.target.value)}
                 variant="outlined"
             />
-            <Button fullWidth variant="contained" color="primary" disableElevation>
-                Save
-            </Button>
+            <AppBar className={theme.appBar} position="fixed" color="primary">
+                <Button className={theme.acceptButton} fullWidth variant="contained" color="primary" disableElevation>
+                    Save
+                </Button>
+            </AppBar>
         </>
 
     )
 };
+
+export default BioForm;

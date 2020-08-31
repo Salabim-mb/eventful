@@ -10,6 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     gridList: {
         flexWrap: 'nowrap',
+        minHeight: "200px",
             // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
             transform: 'translateZ(0)',
     },
@@ -20,7 +21,23 @@ export const useStyles = makeStyles((theme) => ({
         background:
             'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
     },
+    addPhotoButton: {
+        marginBottom: theme.spacing(1)
+    },
     fileInput: {
         display: "none"
+    },
+    acceptButton: {
+        //marginTop: theme.spacing(1),
+        bottom: "0",
+        height: "5%",
+        width: "100%"
+    },
+    bio: {
+        marginTop: theme.spacing(1)
+    },
+    appBar: {
+        top: 'auto',
+        bottom: 0
     }
 }));
