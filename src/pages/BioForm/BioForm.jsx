@@ -7,23 +7,33 @@ import AppBar from "@material-ui/core/AppBar";
 
 const BioForm = () => {
     const theme = useStyles();
-    const [data, setData] = useState([]);
     const [age, setAge] = useState(18);
     const [bio, setBio] = useState("");
+    const [photos, setPhotos] = useState([]);
+    let fileInput = React.createRef();
 
 
     const deletePhoto = (id) => {
-        const newData = data.filter((photo) => photo.id !== id);
-        setData(newData);
+        const newData = photos.filter((photo) => photo.id !== id);
+        setPhotos(newData);
     };
 
     const addPhotos = (e) => {
-
+        const file = fileInput.current.files[0];
+        let newPhotos = [...photos];
+        let photo = {
+            id: photos.length,
+            img: file,
+            title: file.name
+        };
+        newPhotos.append(photo);
+        setPhotos(newPhotos);
+        fileInput = React.createRef();
     };
 
     return (
         <>
-            <SingleLineGridList theme={theme} data={data} onPhotoClick={deletePhoto}/>
+            <SingleLineGridList theme={theme} data={photos} onPhotoClick={deletePhoto}/>
             <input
                 hidden
                 type="file"
@@ -31,6 +41,7 @@ const BioForm = () => {
                 accept="image/*"
                 id="photo"
                 onChange={addPhotos}
+                ref={(ref) => fileInput.current = ref}
             />
             <label htmlFor="photo">
                 <Button
@@ -66,6 +77,7 @@ const BioForm = () => {
                 onChange={e => setBio(e.target.value)}
                 variant="outlined"
             />
+            {console.log(fileInput)}
             <AppBar className={theme.appBar} position="fixed" color="primary">
                 <Button className={theme.acceptButton} fullWidth variant="contained" color="primary" disableElevation>
                     Save
