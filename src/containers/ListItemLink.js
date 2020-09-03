@@ -6,12 +6,15 @@ import ListItem from "@material-ui/core/ListItem";
 
 const ListItemLink = ({path, name, icon, onClick}) => {
     const renderLink = React.useMemo(
-        () => React.forwardRef((itemProps, ref) => <RouterLink to={path} ref={ref} {...itemProps} />),
+        () => React.forwardRef(
+            (itemProps, ref) =>
+                <RouterLink to={path} ref={ref} {...itemProps} />
+            ),
         [path]
     );
 
     return (
-        <ListItem button key={name} component={ onClick === null ? renderLink : onClick}>
+        <ListItem button component={ onClick === null ? renderLink : onClick}>
             <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText primary={name} />
         </ListItem>
