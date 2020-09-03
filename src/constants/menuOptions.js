@@ -43,7 +43,8 @@ export const userOptions = [
     }, {
         name: 'Log out',
         icon: <MeetingRoomIcon />,
-        onClick: null
+        onClick: null,
+        path: ""
     }, {
         name: 'Register',
         icon: <HowToRegIcon />,
