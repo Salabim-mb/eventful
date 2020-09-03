@@ -1,6 +1,7 @@
 import {
     SignUp,
     SignIn,
+    BioForm,
     Settings,
     MyEvents,
     EventForm
@@ -15,7 +16,7 @@ const path_list = {
     NEW_EVENT: "/newevent",
     SETTINGS: "/me/settings",
     MEET: "/meet",
-    MEET_CONFIG: "/meet/setprofile",
+    MEET_SETUP: "/me/setupmeet",
     FRIEND_LIST: "/me/friends"
 };
 
@@ -27,6 +28,10 @@ export default [
     }, {
         path: path_list.LOGIN,
         component: SignIn,
+        exact: true
+    }, {
+        path: path_list.MEET_SETUP,
+        component: BioForm,
         exact: true
     }, {
         path: path_list.SETTINGS,
