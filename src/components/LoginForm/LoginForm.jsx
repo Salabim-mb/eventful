@@ -5,7 +5,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import CustomSnackBar from "../../containers/CustomSnackbar";
+import CustomSnackBar from "containers/CustomSnackbar";
 
 const LoginForm = ({theme, onSubmit}) => {
     const [state, setState] = useState({

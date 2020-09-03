@@ -1,20 +1,10 @@
 import {
     SignUp,
     SignIn,
-    MyEvents
+    MyEvents,
+    EventForm
 } from 'pages';
-
-const path_list = {
-    DASHBOARD: "/",
-    REGISTER: "/register",
-    LOGIN: "/login",
-    PROFILE: "/me/profile",
-    MY_EVENTS: "/me/events",
-    NEW_EVENT: "/newevent",
-    SETTINGS: "/me/settings",
-    MEET: "/meet",
-    FRIEND_LIST: "/me/friends"
-};
+import {path_list} from "./path_list";
 
 export default [
     {
@@ -29,7 +19,9 @@ export default [
         path: path_list.MY_EVENTS,
         component: MyEvents,
         exact: true
+    }, {
+        path: path_list.NEW_EVENT,
+        component: EventForm,
+        exact: true
     }
 ];
-
-export { path_list };
