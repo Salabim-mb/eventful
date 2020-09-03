@@ -1,10 +1,23 @@
 import {
     SignUp,
     SignIn,
+    Settings,
     MyEvents,
     EventForm
 } from 'pages';
-import {path_list} from "./path_list";
+
+const path_list = {
+    DASHBOARD: "/",
+    REGISTER: "/register",
+    LOGIN: "/login",
+    PROFILE: "/me/profile",
+    MY_EVENTS: "/me/events",
+    NEW_EVENT: "/newevent",
+    SETTINGS: "/me/settings",
+    MEET: "/meet",
+    MEET_CONFIG: "/meet/setprofile",
+    FRIEND_LIST: "/me/friends"
+};
 
 export default [
     {
@@ -16,12 +29,15 @@ export default [
         component: SignIn,
         exact: true
     }, {
+        path: path_list.SETTINGS,
+        component: Settings,
+        exact: true
+    }, {
         path: path_list.MY_EVENTS,
         component: MyEvents,
         exact: true
     }, {
         path: path_list.NEW_EVENT,
         component: EventForm,
-        exact: true
     }
 ];
