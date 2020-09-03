@@ -9,5 +9,8 @@ export const useStyles = makeStyles({
     },
     button: {
         alignItems: 'left'
+    },
+    saveButton: {
+        alignItems: 'right'
     }
 });

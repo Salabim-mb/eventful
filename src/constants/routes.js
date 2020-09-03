@@ -1,7 +1,10 @@
 import {
     SignUp,
     SignIn,
-    BioForm
+    BioForm,
+    Settings,
+    MyEvents,
+    EventForm
 } from 'pages';
 
 const path_list = {
@@ -30,7 +33,16 @@ export default [
         path: path_list.MEET_SETUP,
         component: BioForm,
         exact: true
+    }, {
+        path: path_list.SETTINGS,
+        component: Settings,
+        exact: true
+    }, {
+        path: path_list.MY_EVENTS,
+        component: MyEvents,
+        exact: true
+    }, {
+        path: path_list.NEW_EVENT,
+        component: EventForm,
     }
 ];
-
-export { path_list };

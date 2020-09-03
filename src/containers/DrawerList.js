@@ -17,13 +17,13 @@ const DrawerList = ({anchor, theme, toggleDrawer}) => (
     >
         <List>
             {menuOptions.map(item => (
-                <ListItemLink path={item.path} name={item.name} icon={item.icon} onClick={null}/>
+                <ListItemLink key={item.path} path={item.path} name={item.name} icon={item.icon} onClick={null}/>
             ))}
         </List>
         <Divider/>
         <List>
             {userOptions.map(item => (
-                <ListItemLink path={item.path} name={item.name} icon={item.icon} onClick={item.onClick || null} />
+                <ListItemLink key={item.path} path={item.path} name={item.name} icon={item.icon} onClick={item.onClick || null} />
             ))}
         </List>
     </div>
