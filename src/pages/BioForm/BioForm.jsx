@@ -101,6 +101,7 @@ const BioForm = () => {
             <SingleLineGridList theme={theme} data={photos} onPhotoClick={deletePhoto}/>
             <form
                 noValidate
+                onSubmit={validateForm}
             >
                 <input
                     hidden
@@ -150,7 +151,14 @@ const BioForm = () => {
                 />
                 {console.log(fileInput)}
                 <AppBar className={theme.appBar} position="fixed" color="primary">
-                    <Button className={theme.acceptButton} fullWidth variant="contained" color="primary" disableElevation>
+                    <Button
+                        className={theme.acceptButton}
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        disableElevation
+                        type="submit"
+                    >
                         Save
                     </Button>
                 </AppBar>
