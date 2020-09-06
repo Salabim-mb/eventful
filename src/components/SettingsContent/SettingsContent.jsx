@@ -12,7 +12,7 @@ const SettingsContent = ({theme, setDarkMode}) => {
     const settings = useContext(SettingsContext);
     const [redirect, setRedirect] = useState(false);
     const [meet, setMeet] = useState(settings?.meet || false);
-    const [dark, setDark] = useState(!settings?.dark || false);
+    const [dark, setDark] = useState(settings?.dark || false);
     const [nots, setNots] = useState(settings?.nots || false);
 
     return (
@@ -58,10 +58,6 @@ const SettingsContent = ({theme, setDarkMode}) => {
             <Divider />
             <ListItem button className={theme.listItem}> {/*fetch*/}
                 <ListItemText primary="Reset bio" />
-            </ListItem>
-            <Divider />
-            <ListItem button className={theme.listItem}> {/*do poprawy żeby resetowało wszystko*/}
-                <ListItemText primary="Reset settings" />
             </ListItem>
             {redirect && <Redirect to={path_list.MEET_CONFIG}/>}
         </List>
