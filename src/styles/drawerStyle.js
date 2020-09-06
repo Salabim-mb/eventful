@@ -1,6 +1,6 @@
 import {makeStyles} from "@material-ui/core/styles";
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
     list: {
         width: 250
     },
@@ -12,5 +12,8 @@ export const useStyles = makeStyles({
     },
     saveButton: {
         alignItems: 'right'
+    },
+    buttonBar: {
+        right: theme.spacing(1)
     }
-});
+}));

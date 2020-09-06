@@ -7,7 +7,7 @@ import {
     EventForm
 } from 'pages';
 
-const path_list = {
+export const path_list = {
     DASHBOARD: "/",
     REGISTER: "/register",
     LOGIN: "/login",
