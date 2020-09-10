@@ -1,11 +1,20 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import {Redirect} from "react-router-dom";
-import CustomSnackBar from "../../containers/CustomSnackbar";
+import CustomSnackBar from "containers/CustomSnackbar";
+import {PersistentContext} from "context/PersistentContext";
+import {generateToken} from "utils/generateToken";
+import {Users} from "data/Users";
+import {User} from "models/User";
 
+const signUserIn = (user, data) => {
+    let _user = new User(data.email, data.firstName, data.lastName, data.password);
+    user.login(_user.getToken(), data);
+    Users.push(_user);
+};
 
 const RegisterForm = ({theme, onSubmit}) => {
     const [state, setState] = useState({
@@ -19,11 +28,23 @@ const RegisterForm = ({theme, onSubmit}) => {
     const [equal, setEqual] = useState(true);
     const [validated, setValidated] = useState(false);
 
+    const user = useContext(PersistentContext);
+
     const validate = (e) => {
         e.preventDefault();
         const is_ok = onSubmit(e);
         if (is_ok) {
-            state.password === state.passwordR ? setValidated(true) : setEqual(false);
+            if (state.password === state.passwordR) {
+                try {
+                    signUserIn(user, state);
+                    setValidated(true);
+                    console.log(Users);
+                } catch(e) {
+                    console.log(e);
+                }
+            } else {
+                setEqual(false);
+            }
         } else {
             setCorrect(false);
         }
