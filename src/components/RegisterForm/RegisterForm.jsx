@@ -6,14 +6,13 @@ import Link from "@material-ui/core/Link";
 import {Redirect} from "react-router-dom";
 import CustomSnackBar from "containers/CustomSnackbar";
 import {PersistentContext} from "context/PersistentContext";
-import {generateToken} from "utils/generateToken";
-import {Users} from "data/Users";
 import {User} from "models/User";
+import {registerUser} from "data/Users";
 
 const signUserIn = (user, data) => {
     let _user = new User(data.email, data.firstName, data.lastName, data.password);
-    user.login(_user.getToken(), data);
-    Users.push(_user);
+    user.login(_user.getToken, data);
+    registerUser(_user);
 };
 
 const RegisterForm = ({theme, onSubmit}) => {
@@ -38,7 +37,6 @@ const RegisterForm = ({theme, onSubmit}) => {
                 try {
                     signUserIn(user, state);
                     setValidated(true);
-                    console.log(Users);
                 } catch(e) {
                     console.log(e);
                 }
@@ -67,6 +65,7 @@ const RegisterForm = ({theme, onSubmit}) => {
                         id="firstName"
                         label="First Name"
                         autoFocus
+                        value={state.firstName}
                         onChange={e => setState({...state, [e.target.name]: e.target.value})}
                     />
                 </Grid>
@@ -79,6 +78,7 @@ const RegisterForm = ({theme, onSubmit}) => {
                         label="Last Name"
                         name="lastName"
                         autoComplete="lastName"
+                        value={state.lastName}
                         onChange={e => setState({...state, [e.target.name]: e.target.value})}
                     />
                 </Grid>
@@ -92,6 +92,7 @@ const RegisterForm = ({theme, onSubmit}) => {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
+                        value={state.email}
                         onChange={e => setState({...state, [e.target.name]: e.target.value})}
                     />
                 </Grid>
@@ -106,6 +107,7 @@ const RegisterForm = ({theme, onSubmit}) => {
                         id="password"
                         autoComplete="password"
                         minLength="6"
+                        value={state.password}
                         onChange={e => setState({...state, [e.target.name]: e.target.value})}
                     />
                 </Grid>
@@ -120,6 +122,7 @@ const RegisterForm = ({theme, onSubmit}) => {
                         id="passwordR"
                         autoComplete="passwordR"
                         minLength="6"
+                        value={state.passwordR}
                         onChange={e => setState({...state, [e.target.name]: e.target.value})}
                     />
                 </Grid>

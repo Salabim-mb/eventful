@@ -1,9 +1,9 @@
 import {generateToken} from "../utils/generateToken";
 
 export class User {
-    constructor(mail, name, surname, password) {
+    constructor(email, name, surname, password) {
         this.id = generateToken(); //PUBLIC KEY
-        this.mail = mail;
+        this.email = email;
         this.name = name;
         this.surname = surname;
         this.password = password;
@@ -15,17 +15,21 @@ export class User {
         return this.id;
     }
 
+    set newToken(token) {
+        this.token = generateToken();
+    }
+
     get getToken() {
-        return this.token();
+        return this.token;
     }
 
     set deleteToken(token) {
-        this.token = token;
+        this.token = null;
     }
 
-    get data() {
+    get getData() {
         return {
-            mail: this.mail,
+            email: this.email,
             name: this.name,
             surname: this.surname,
             password: this.password

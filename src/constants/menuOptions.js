@@ -40,18 +40,22 @@ export const userOptions = [
         name: 'Settings',
         icon: <SettingsIcon />,
         path: path_list.SETTINGS,
+        login: true
     }, {
         name: 'Log out',
         icon: <MeetingRoomIcon />,
         onClick: null,
-        path: ""
+        path: "",
+        login: true
     }, {
         name: 'Register',
         icon: <HowToRegIcon />,
-        path: path_list.REGISTER
+        path: path_list.REGISTER,
+        login: false
     }, {
         name: 'Log in',
         icon: <ExitToAppIcon />,
-        path: path_list.LOGIN
+        path: path_list.LOGIN,
+        login: false
     }
 ];
