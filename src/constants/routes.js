@@ -4,7 +4,8 @@ import {
     BioForm,
     Settings,
     MyEvents,
-    EventForm
+    EventForm,
+    Profile
 } from 'pages';
 
 export const path_list = {
@@ -44,5 +45,8 @@ export default [
     }, {
         path: path_list.NEW_EVENT,
         component: EventForm,
+    }, {
+        path: path_list.PROFILE,
+        component: Profile
     }
 ];
