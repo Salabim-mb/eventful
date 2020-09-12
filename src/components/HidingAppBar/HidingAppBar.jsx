@@ -14,6 +14,7 @@ import Badge from "@material-ui/core/Badge";
 import {PersistentContext} from "../../context/PersistentContext";
 import {getUserByToken, logoutUser} from "../../data/Users";
 import {Redirect} from "react-router-dom";
+import {logout} from "../../utils/logout";
 
 
 const HidingAppBar = ({theme, toggleDrawer, showNots}) => {
@@ -26,10 +27,9 @@ const HidingAppBar = ({theme, toggleDrawer, showNots}) => {
 
     const user = useContext(PersistentContext);
 
-    const logout = () => {
+    const _logout = () => {
         if (user?.token) {
-            logoutUser(user.token);
-            user.logout();
+            logout(user);
             setRedirect(true);
         }
     };
@@ -92,7 +92,7 @@ const HidingAppBar = ({theme, toggleDrawer, showNots}) => {
                                         aria-label="account of current user"
                                         aria-controls="menu-appbar"
                                         aria-haspopup="true"
-                                        onClick={handleMenu}
+                                        onClick={_logout}
                                         color="inherit"
                                     >
                                         <ExitToAppIcon />

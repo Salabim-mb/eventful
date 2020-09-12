@@ -11,6 +11,8 @@
     - token
 */
 
+import {generateToken} from "../utils/generateToken";
+
 const User = () => ({
     id: "",
     mail: "",
@@ -40,10 +42,17 @@ export const getUserByToken = (token) => {
 };
 
 export const loginUser = (email, password) => {
-    let user = Users.filter((u) => u.email === email && u.password === password);
-    if (user !== []) {
+    let user = Users.filter((el) => {
+        if (el.email == email && el.password == password) {
+            return el;
+        } else {
+            return null;
+        }
+    });
+    console.log(Users);
+    if (user) {
         console.log(user);
-        user.newToken = "";
+        user.newToken = generateToken();
         return user;
     }
     return null;

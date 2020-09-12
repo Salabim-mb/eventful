@@ -7,6 +7,8 @@ import Divider from "@material-ui/core/Divider";
 import {SettingsContext} from "context/SettingsContext";
 import {Redirect} from "react-router-dom";
 import {path_list} from "constants/routes";
+import {PersistentContext} from "../../context/PersistentContext";
+import {removeBio} from "../../data/Bios";
 
 const SettingsContent = ({theme, setDarkMode}) => {
     const settings = useContext(SettingsContext);
@@ -14,6 +16,8 @@ const SettingsContent = ({theme, setDarkMode}) => {
     const [meet, setMeet] = useState(settings?.meet || false);
     const [dark, setDark] = useState(settings?.dark || false);
     const [nots, setNots] = useState(settings?.nots || false);
+
+    const user = useContext(PersistentContext);
 
     return (
         <List className={theme.list}>
@@ -56,7 +60,10 @@ const SettingsContent = ({theme, setDarkMode}) => {
                     />
             </ListItem>
             <Divider />
-            <ListItem button className={theme.listItem}> {/*fetch*/}
+            <ListItem button className={theme.listItem} onClick={() => {
+                removeBio(user.id);
+                settings.changeSettings({meet: false});
+            }}>
                 <ListItemText primary="Reset bio" />
             </ListItem>
             {redirect && <Redirect to={path_list.MEET_CONFIG}/>}

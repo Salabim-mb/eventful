@@ -15,7 +15,7 @@ export class User {
         return this.id;
     }
 
-    set newToken(token) {
+    set newToken(par) {
         this.token = generateToken();
     }
 

@@ -5,45 +5,22 @@ import Button from "@material-ui/core/Button";
 import {TextField} from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import {PersistentContext} from "context/PersistentContext";
-import CustomSnackBar from "../../containers/CustomSnackbar";
+import CustomSnackBar from "containers/CustomSnackbar";
+import {getUserByToken} from "../../data/Users";
+import {Bio} from "../../models/Bio";
+import {addBio, removeBio} from "../../data/Bios";
+import {SettingsContext} from "../../context/SettingsContext";
 
-const updateBio = (data, token) => {
-    const url = "";
-    const headersTxt = {
-        "Authorization": "Token " + token
-    };
-    const headersImg = {
-        "Authorization": "Token " + token
-    };
-
-    const resImg = fetch(url, {
-        method: "POST",
-        headers: headersImg,
-        body: [...data.photos]
-    });
-
-    const resTxt = fetch(url, {
-        method: "POST",
-        headers: headersImg,
-        body: JSON.stringify({
-            age: data.age,
-            bio: data.bio
-        })
-    });
-
-    let result = Promise.all([resImg, resTxt]);
-    result.catch((e) => result = e);
-    result.then(() => result = true);
-
-    if (result === true) {
-        return true;
-    } else {
-        throw new Error("Sth went wrong: " + result.stackTrace);
+const updateBio = (data, token, settings) => {
+    try {
+        let user = getUserByToken(token);
+        let bio = new Bio(user, data.age, data.bio, data.photos);
+        removeBio(user.id);
+        addBio(bio);
+        settings.changeSettings({meet: true});
+    } catch(e) {
+        throw e.stackTrace;
     }
-};
-
-const rollbackFetch = () => {
-
 };
 
 const BioForm = () => {
@@ -53,6 +30,7 @@ const BioForm = () => {
     const [photos, setPhotos] = useState([]);
     const [showModal, setShowModal] = useState(false);
     let fileInput = React.createRef();
+    let settings = useContext(SettingsContext);
 
     let context = useContext(PersistentContext);
 
@@ -86,11 +64,10 @@ const BioForm = () => {
                     photos: photos,
                     bio: bio,
                     age: age
-                }, context.token);
+                }, context.token, settings);
                 setShowModal(true);
                 setTimeout(() => setShowModal(false), 3000);
             } catch(e) {
-                rollbackFetch();
                 console.log(e);
             }
         }
