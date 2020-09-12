@@ -4,6 +4,7 @@ import BioForm from "pages/BioForm";
 import Settings from "pages/Settings";
 import MyEvents from "pages/MyEvents";
 import EventForm from "pages/EventForm";
+import Profile from "pages/Profile";
 
 export {
     SignUp,
@@ -11,5 +12,6 @@ export {
     BioForm,
     Settings,
     MyEvents,
-    EventForm
+    EventForm,
+    Profile
 }
