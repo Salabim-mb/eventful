@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -6,6 +6,20 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import CustomSnackBar from "containers/CustomSnackbar";
+import {PersistentContext} from "context/PersistentContext";
+import {loginUser} from "data/Users";
+import {Redirect} from "react-router-dom";
+
+const logUserIn = (context, state, setError) => {
+    try {
+        let user = loginUser(state.email, state.password);
+        context.login(user.getToken, user.getData);
+        return true;
+    } catch(e) {
+        setError(true);
+        return false;
+    }
+};
 
 const LoginForm = ({theme, onSubmit}) => {
     const [state, setState] = useState({
@@ -13,11 +27,17 @@ const LoginForm = ({theme, onSubmit}) => {
         password: ""
     });
     const [error, setError] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+
+    const user = useContext(PersistentContext);
 
     const validate = (e) => {
         e.preventDefault();
-        const is_ok = onSubmit(e);
-        setError(!is_ok);
+        if (onSubmit(e)) {
+            logUserIn(user, state, setError) && setRedirect(true);
+        } else {
+            setError(true);
+        }
     };
 
     return (
@@ -33,6 +53,7 @@ const LoginForm = ({theme, onSubmit}) => {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={state.email}
                 onChange={e => setState({...state, email: e.target.value})}
             />
             <TextField
@@ -44,6 +65,7 @@ const LoginForm = ({theme, onSubmit}) => {
                 label="Password"
                 type="password"
                 id="password"
+                value={state.password}
                 autoComplete="current-password"
                 onChange={e => setState({...state, password: e.target.value})}
             />
@@ -72,7 +94,8 @@ const LoginForm = ({theme, onSubmit}) => {
                     </Link>
                 </Grid>
             </Grid>
-            {error ? <CustomSnackBar message="Something went wrong. Try again" /> : null }
+            {error && <CustomSnackBar message="Something went wrong. Try again" /> }
+            {redirect && <Redirect to="/me/profile" /> }
         </form>
     );
 };

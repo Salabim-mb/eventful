@@ -4,7 +4,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
 
-const ListItemLink = ({path, name, icon, onClick}) => {
+const ListItemLink = ({path, name, icon, click}) => {
     const renderLink = React.useMemo(
         () => React.forwardRef(
             (itemProps, ref) =>
@@ -14,7 +14,7 @@ const ListItemLink = ({path, name, icon, onClick}) => {
     );
 
     return (
-        <ListItem button component={ onClick === null ? renderLink : onClick}>
+        <ListItem button component={ click === null ? renderLink : click}>
             <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText primary={name} />
         </ListItem>

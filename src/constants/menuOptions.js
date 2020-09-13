@@ -9,6 +9,7 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
 import {path_list} from "./path_list";
+import {logoutUser} from "../data/Users";
 
 
 export const menuOptions = [
@@ -40,18 +41,22 @@ export const userOptions = [
         name: 'Settings',
         icon: <SettingsIcon />,
         path: path_list.SETTINGS,
+        login: true
     }, {
         name: 'Log out',
         icon: <MeetingRoomIcon />,
-        onClick: null,
-        path: ""
+        action: true,
+        path: "",
+        login: true
     }, {
         name: 'Register',
         icon: <HowToRegIcon />,
-        path: path_list.REGISTER
+        path: path_list.REGISTER,
+        login: false
     }, {
         name: 'Log in',
         icon: <ExitToAppIcon />,
-        path: path_list.LOGIN
+        path: path_list.LOGIN,
+        login: false
     }
 ];

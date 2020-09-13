@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {CssBaseline, useScrollTrigger} from "@material-ui/core";
 import Slide from "@material-ui/core/Slide";
 import AppBar from "@material-ui/core/AppBar";
@@ -11,6 +11,10 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Badge from "@material-ui/core/Badge";
+import {PersistentContext} from "../../context/PersistentContext";
+import {getUserByToken, logoutUser} from "../../data/Users";
+import {Redirect} from "react-router-dom";
+import {logout} from "../../utils/logout";
 
 
 const HidingAppBar = ({theme, toggleDrawer, showNots}) => {
@@ -18,7 +22,17 @@ const HidingAppBar = ({theme, toggleDrawer, showNots}) => {
 
     const trigger = useScrollTrigger({ target: window });
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [redirect, setRedirect] = useState(false);
     const open = Boolean(anchorEl);
+
+    const user = useContext(PersistentContext);
+
+    const _logout = () => {
+        if (user?.token) {
+            logout(user);
+            setRedirect(true);
+        }
+    };
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -38,54 +52,59 @@ const HidingAppBar = ({theme, toggleDrawer, showNots}) => {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6">Eventful</Typography>
-                        <div className={theme.buttonBar}>
-                            {
-                                showNots && (
+                        {
+                            user?.token && (
+                                <div className={theme.buttonBar}>
+                                    {
+                                        showNots && (
+                                            <IconButton
+                                                aria-label="account of current user"
+                                                aria-controls="menu-appbar"
+                                                aria-haspopup="true"
+                                                onClick={handleMenu}
+                                                color="inherit"
+                                            >
+                                                <Badge color="secondary" badgeContent={notificationCounter}>
+                                                    <NotificationsIcon />
+                                                </Badge>
+                                            </IconButton>
+                                        )
+                                    }
+                                    <Menu
+                                        id="menu-appbar"
+                                        anchorEl={anchorEl}
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        open={open}
+                                        onClose={handleClose}
+                                    >
+                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                                    </Menu>
                                     <IconButton
                                         aria-label="account of current user"
                                         aria-controls="menu-appbar"
                                         aria-haspopup="true"
-                                        onClick={handleMenu}
+                                        onClick={_logout}
                                         color="inherit"
                                     >
-                                        <Badge color="secondary" badgeContent={notificationCounter}>
-                                            <NotificationsIcon />
-                                        </Badge>
+                                        <ExitToAppIcon />
                                     </IconButton>
-                                )
-                            }
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={open}
-                                onClose={handleClose}
-                            >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                            </Menu>
-                            <IconButton
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                            >
-                                <ExitToAppIcon />
-                            </IconButton>
-                        </div>
+                                </div>
+                            )
+                        }
                     </Toolbar>
                 </AppBar>
             </Slide>
             <Toolbar />
+            {redirect && <Redirect to="/login" />}
         </React.Fragment>
     )
 };

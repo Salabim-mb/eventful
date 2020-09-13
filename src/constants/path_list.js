@@ -7,5 +7,6 @@ export const path_list = {
     NEW_EVENT: "/newevent",
     SETTINGS: "/me/settings",
     MEET: "/meet",
-    FRIEND_LIST: "/me/friends"
+    FRIEND_LIST: "/me/friends",
+    MEET_SETUP: "/meet/setupmeet"
 };

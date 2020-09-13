@@ -12,8 +12,6 @@ import {loginReddit} from "utils/oauth/reddit";
 import LoginForm from "components/LoginForm/LoginForm";
 import {validateForm} from "utils/validateForm";
 
-
-
 const SignIn = () => {
     const theme = useStyles();
 

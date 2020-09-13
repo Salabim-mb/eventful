@@ -7,11 +7,4 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center'
     },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main
-    },
-    credentials: {
-        marginBottom: theme.spacing(2)
-    }
 }));

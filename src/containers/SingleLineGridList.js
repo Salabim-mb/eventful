@@ -10,15 +10,15 @@ export const SingleLineGridList = ({data, theme, onPhotoClick}) => (
         <GridList className={theme.gridList} cols={2.5}>
             {data.map((tile) => (
                 <GridListTile key={tile.img}>
-                    <img src={tile.img} alt={tile.title} />
+                    <img src={tile?.img} alt={tile?.title} />
                     <GridListTileBar
-                        title={tile.title}
+                        title={tile?.title}
                         classes={{
                             root: theme.titleBar,
                             title: theme.title
                         }}
                         actionIcon={
-                            <IconButton aria-label={`delete ${tile.title}`} onClick={() => onPhotoClick(tile.id)}>
+                            <IconButton aria-label={`delete ${tile}`} onClick={() => onPhotoClick(tile.id)}>
                                 <ClearIcon />
                             </IconButton>
                         }

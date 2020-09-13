@@ -99,7 +99,7 @@ const EventFormContent = ({theme}) => {
                 required
                 fullWidth
                 id="name"
-                label="Event name"
+                label="Events name"
                 name="name"
                 autoFocus
                 value={state.name}

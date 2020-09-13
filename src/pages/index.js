@@ -5,6 +5,7 @@ import Settings from "pages/Settings";
 import MyEvents from "pages/MyEvents";
 import EventForm from "pages/EventForm";
 import Profile from "pages/Profile";
+import Friends from "pages/Friends";
 
 export {
     SignUp,
@@ -13,5 +14,6 @@ export {
     Settings,
     MyEvents,
     EventForm,
-    Profile
+    Profile,
+    Friends
 }

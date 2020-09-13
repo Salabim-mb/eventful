@@ -4,12 +4,14 @@ import {SwipeableDrawer} from "@material-ui/core";
 import DrawerList from "containers/DrawerList";
 import HidingAppBar from "components/HidingAppBar/HidingAppBar";
 import {SettingsContext} from "context/SettingsContext";
+import {PersistentContext} from "../../context/PersistentContext";
 
 
 const MenuBar = () => {
     const theme = useStyles();
     const [left, setLeft] = useState(false);
     const settingsContext = useContext(SettingsContext);
+    const userContext = useContext(PersistentContext);
 
     const toggleDrawer = (left) => (event) => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -28,7 +30,7 @@ const MenuBar = () => {
                 onClose={toggleDrawer(false)}
                 onOpen={toggleDrawer( true)}
             >
-                <DrawerList anchor="left" theme={theme} toggleDrawer={toggleDrawer}/>
+                <DrawerList anchor="left" theme={theme} toggleDrawer={toggleDrawer} user={userContext}/>
             </SwipeableDrawer>
         </React.Fragment>
     );
