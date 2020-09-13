@@ -13,7 +13,9 @@ import {Redirect} from "react-router-dom";
 const logUserIn = (context, state, setError) => {
     try {
         let user = loginUser(state.email, state.password);
-        context.login(user.getToken, user.getData);
+        let data = user.getData;
+
+        context.login(user.getToken, {id: data.id, firstName: data.name, lastName: data.surname, email: data.email});
         return true;
     } catch(e) {
         setError(true);
