@@ -28,7 +28,6 @@ const DrawerList = ({anchor, theme, toggleDrawer, user}) => (
             {user?.token && menuOptions.map(item => (
                 <ListItemLink key={item.path} path={item.path} name={item.name} icon={item.icon} click={null}/>
             ))}
-            {console.log(user)}
         </List>
         <Divider/>
         <List>

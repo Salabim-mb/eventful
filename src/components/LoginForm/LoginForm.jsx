@@ -11,12 +11,13 @@ import {loginUser} from "data/Users";
 import {Redirect} from "react-router-dom";
 
 const logUserIn = (context, state, setError) => {
-    let user = loginUser(state.email, state.password);
-    console.log(user);
-    if (user !== null && user !== []) {
+    try {
+        let user = loginUser(state.email, state.password);
         context.login(user.getToken, user.getData);
-    } else {
+        return true;
+    } catch(e) {
         setError(true);
+        return false;
     }
 };
 
@@ -33,8 +34,7 @@ const LoginForm = ({theme, onSubmit}) => {
     const validate = (e) => {
         e.preventDefault();
         if (onSubmit(e)) {
-            logUserIn(user, state, setError);
-            setRedirect(true);
+            logUserIn(user, state, setError) && setRedirect(true);
         } else {
             setError(true);
         }

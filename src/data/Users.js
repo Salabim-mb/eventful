@@ -50,12 +50,12 @@ export const loginUser = (email, password) => {
         }
     });
     console.log(Users);
-    if (user.length > 0) {
-        console.log(user);
+    console.log(user);
+    if (user !== [] && user.length > 0) {
         user[0].newToken = generateToken();
         return user[0];
     }
-    return null;
+    throw "";
 };
 
 export const logoutUser = (token) => {

@@ -22,20 +22,19 @@ const Profile = () => {
 
     return (
         <Container component="main" maxWidth="xs">
-            {console.log(user)}
             <CssBaseline />
             <div className={theme.paper}>
                 <Avatar className={theme.avatar}>
                     <AccountCircleIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5" className={theme.credentials}>{`${user.data.firstName} ${user.data.lastName}`}</Typography>
+                <Typography component="h1" variant="h5" className={theme.credentials}>{`${user?.data?.firstName} ${user?.data?.lastName}`}</Typography>
                 <ListItem className={theme.listItem}>
                     <ListItemIcon>
                         <EmailIcon/>
                     </ListItemIcon>
                     <ListItemText primary="Email address" />
                     <Typography variant="overline" gutterBottom>
-                        {user.data.email}
+                        {user?.data?.email}
                     </Typography>
 
                 </ListItem>

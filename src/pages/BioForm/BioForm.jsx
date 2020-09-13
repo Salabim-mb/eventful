@@ -11,7 +11,7 @@ import {Bio} from "../../models/Bio";
 import {addBio, removeBio} from "../../data/Bios";
 import {SettingsContext} from "../../context/SettingsContext";
 import {path_list} from "../../constants/path_list";
-import Redirect from "react-router-dom/es/Redirect";
+import {Redirect} from "react-router-dom";
 
 const updateBio = (data, token, settings) => {
     try {
