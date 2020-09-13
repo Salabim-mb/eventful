@@ -38,22 +38,22 @@ export const getUserById = (id) => {
 
 export const getUserByToken = (token) => {
     let user = Users.filter((u) => u.token === token);
-    return user;
+    return user !== [] ? user : null;
 };
 
 export const loginUser = (email, password) => {
     let user = Users.filter((el) => {
-        if (el.email == email && el.password == password) {
+        if (el.email === email && el.password === password) {
             return el;
         } else {
             return null;
         }
     });
     console.log(Users);
-    if (user) {
+    if (user.length > 0) {
         console.log(user);
-        user.newToken = generateToken();
-        return user;
+        user[0].newToken = generateToken();
+        return user[0];
     }
     return null;
 };

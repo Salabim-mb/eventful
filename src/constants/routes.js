@@ -5,7 +5,8 @@ import {
     Settings,
     MyEvents,
     EventForm,
-    Profile
+    Profile,
+    Friends
 } from 'pages';
 
 export const path_list = {
@@ -47,6 +48,11 @@ export default [
         component: EventForm,
     }, {
         path: path_list.PROFILE,
-        component: Profile
+        component: Profile,
+        exact: true
+    }, {
+        path: path_list.FRIEND_LIST,
+        component: Friends,
+        exact: true
     }
 ];

@@ -14,20 +14,20 @@ const SettingsContent = ({theme, setDarkMode}) => {
     const settings = useContext(SettingsContext);
     const [redirect, setRedirect] = useState(false);
     const [meet, setMeet] = useState(settings?.meet || false);
-    const [dark, setDark] = useState(settings?.dark || false);
+    const [dark, setDark] = useState(settings?.dark);
     const [nots, setNots] = useState(settings?.nots || false);
 
     const user = useContext(PersistentContext);
 
     return (
         <List className={theme.list}>
-            <ListItem className={theme.listItem}>
+            <ListItem className={theme.listItem} onClick={
+                meet ? null : () => setRedirect(true)
+            }>
                 <ListItemText primary="Enable meet" />
                 <Switch
+                    disabled
                     checked={meet}
-                    onChange={() => {
-                        meet ? settings.changeSettings({...settings, meet: false}) : setRedirect(true);
-                    }}
                     name="meet"
                     inputProps={{'aria-label': 'secondary checkbox'}}
                 />
@@ -63,10 +63,11 @@ const SettingsContent = ({theme, setDarkMode}) => {
             <ListItem button className={theme.listItem} onClick={() => {
                 removeBio(user.id);
                 settings.changeSettings({meet: false});
+                setMeet(false);
             }}>
                 <ListItemText primary="Reset bio" />
             </ListItem>
-            {redirect && <Redirect to={path_list.MEET_CONFIG}/>}
+            {redirect && <Redirect to={path_list.MEET_SETUP}/>}
         </List>
     )
 };

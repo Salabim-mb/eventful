@@ -36,6 +36,10 @@ export class User {
         }
     }
 
+    get getFriends() {
+        return this.friendList;
+    }
+
     getFriend(id) {
         return this.friendList.filter((el) => el.id === id);
     }

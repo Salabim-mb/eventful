@@ -10,6 +10,8 @@ import {getUserByToken} from "../../data/Users";
 import {Bio} from "../../models/Bio";
 import {addBio, removeBio} from "../../data/Bios";
 import {SettingsContext} from "../../context/SettingsContext";
+import {path_list} from "../../constants/path_list";
+import Redirect from "react-router-dom/es/Redirect";
 
 const updateBio = (data, token, settings) => {
     try {
@@ -29,6 +31,7 @@ const BioForm = () => {
     const [bio, setBio] = useState("");
     const [photos, setPhotos] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [redirect, setRedirect] = useState(false);
     let fileInput = React.createRef();
     let settings = useContext(SettingsContext);
 
@@ -40,15 +43,22 @@ const BioForm = () => {
         setPhotos(newData);
     };
 
-    const addPhotos = (e) => {
+    const imgToB64 = (file) => new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+    });
+
+    const addPhotos = async (e) => {
         const file = fileInput.current.files[0];
         let newPhotos = [...photos];
         let photo = {
-            id: photos.length,
-            img: file,
-            title: file.name
+            id: photos?.length,
+            img: await imgToB64(file),
+            title: file?.name
         };
-        newPhotos.append(photo);
+        newPhotos.push(photo);
         setPhotos(newPhotos);
         fileInput = React.createRef();
     };
@@ -66,7 +76,10 @@ const BioForm = () => {
                     age: age
                 }, context.token, settings);
                 setShowModal(true);
-                setTimeout(() => setShowModal(false), 3000);
+                setTimeout(() => {
+                    setShowModal(false);
+                    setRedirect(true);
+                }, 3000);
             } catch(e) {
                 console.log(e);
             }
@@ -95,7 +108,7 @@ const BioForm = () => {
                         color="primary"
                         variant="outlined"
                         disabled={photos.length === 5}
-                        onClick={addPhotos}
+                        // onClick={(e) => addPhotos(e)}
                         fullWidth
                         className={theme.addPhotoButton}
                     >
@@ -126,7 +139,6 @@ const BioForm = () => {
                     onChange={e => setBio(e.target.value)}
                     variant="outlined"
                 />
-                {console.log(fileInput)}
                 <AppBar className={theme.appBar} position="fixed" color="primary">
                     <Button
                         className={theme.acceptButton}
@@ -141,6 +153,7 @@ const BioForm = () => {
                 </AppBar>
             </form>
             {showModal && <CustomSnackBar message="Bio has been set up."/>}
+            {redirect && <Redirect to={path_list.PROFILE} />}
         </>
 
     )
